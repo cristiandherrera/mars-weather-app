@@ -83,7 +83,7 @@ a:hover {
 }
 
 .mars-current-weather {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
   padding: 2em;
   max-width: 1000px;
   margin: 4em 0 0 4em;
@@ -226,5 +226,175 @@ a:hover {
 
 .unit :checked ~ .unit__toggle::after {
   margin-left: 3px;
+}
+
+.previous-weather {
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateY(60%);
+          transform: translateY(60%);
+  -webkit-transition: -webkit-transform 350ms ease;
+  transition: -webkit-transform 350ms ease;
+  transition: transform 350ms ease;
+  transition: transform 350ms ease, -webkit-transform 350ms ease;
+  padding: 3em;
+}
+
+.show-previous-weather-button {
+  position: absolute;
+  background: var(--clr-light);
+  left: 50%;
+  width: 10rem;
+  -webkit-transform: translate(-50%, calc(-100% - 3rem));
+          transform: translate(-50%, calc(-100% - 3rem));
+  text-align: center;
+  font-size: var(--fs-h2);
+  line-height: 1;
+  -webkit-clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+          clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+  cursor: pointer;
+  color: var(--clr-gray);
+  border: 0;
+  font-family: inherit;
+}
+
+.show-previous-weather-button:hover, .show-previous-weather-button:focus {
+  color: var(--clr-accent);
+}
+
+.show-previous-weather-button span {
+  display: block;
+  -webkit-transform: rotate(0);
+          transform: rotate(0);
+  -webkit-transition: -webkit-transform 300ms ease;
+  transition: -webkit-transform 300ms ease;
+  transition: transform 300ms ease;
+  transition: transform 300ms ease, -webkit-transform 300ms ease;
+}
+
+.previous-days {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.previous-weather__title {
+  text-align: center;
+}
+
+.previous-day {
+  opacity: 0;
+}
+
+.previous-day > * {
+  margin: 0;
+}
+
+.previous-day__date {
+  font-size: 0.9rem;
+  color: var(--clr-gray);
+}
+
+.previous-day__more-info {
+  cursor: pointer;
+  border: 0;
+  border-radius: 100vmax;
+  background: var(--clr-dark);
+  color: var(--clr-light);
+  text-transform: uppercase;
+  padding: 0.3em 1em;
+  margin-top: 1em;
+}
+
+.previous-day__more-info:hover, .previous-day__more-info:focus {
+  background: var(--clr-gray);
+}
+
+.show-weather.previous-weather {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.show-weather.previous-weather .show-previous-weather-button span {
+  display: block;
+  -webkit-transform: rotate(180deg) translateY(-6px);
+          transform: rotate(180deg) translateY(-6px);
+}
+
+.show-weather.previous-weather .previous-weather__title,
+.show-weather.previous-weather .previous-day {
+  -webkit-animation: slideUpIn 750ms forwards;
+          animation: slideUpIn 750ms forwards;
+}
+
+.show-weather.previous-weather .previous-weather__title {
+  text-align: left;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(1) {
+  -webkit-animation-delay: 100ms;
+          animation-delay: 100ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(2) {
+  -webkit-animation-delay: 125ms;
+          animation-delay: 125ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(3) {
+  -webkit-animation-delay: 150ms;
+          animation-delay: 150ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(4) {
+  -webkit-animation-delay: 175ms;
+          animation-delay: 175ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(5) {
+  -webkit-animation-delay: 200ms;
+          animation-delay: 200ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(6) {
+  -webkit-animation-delay: 225ms;
+          animation-delay: 225ms;
+}
+
+.show-weather.previous-weather .previous-day:nth-child(7) {
+  -webkit-animation-delay: 300ms;
+          animation-delay: 300ms;
+}
+
+@-webkit-keyframes slideUpIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(50%);
+            transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slideUpIn {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(50%);
+            transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
 }
 /*# sourceMappingURL=main.css.map */
