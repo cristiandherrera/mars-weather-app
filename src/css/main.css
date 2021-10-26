@@ -10,14 +10,14 @@
   --fw-normal: 400;
   --fw-semi: 500;
   --fw-bold: 700;
-  --fs-h1: 1.5rem;
-  --fs-h2: 2.25rem;
+  --fs-h1: 1.25rem;
+  --fs-h2: 1.75rem;
   --fs-body: 1rem;
-  --fs-xl: 4.5rem;
+  --fs-xl: 4rem;
   --clr-light: #fff;
   --clr-gray: #989898;
   --clr-dark: #444;
-  --clr-accent: #d06d6d;
+  --clr-accent: #D06D6D;
   --clr-accent-dark: #613131;
 }
 
@@ -34,18 +34,15 @@
 
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: 1.6;
   background-image: url(../img/mars.jpg);
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
   color: var(--clr-light);
+  min-height: 100vh;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   line-height: 1;
 }
 
@@ -60,8 +57,8 @@ a:hover {
 .main-title {
   font-size: var(--fs-h1);
   font-weight: var(--fw-light);
-  color: var(--clr-accent);
   text-transform: uppercase;
+  color: var(--clr-accent);
   letter-spacing: 2px;
   grid-column: 1 / -1;
 }
@@ -83,15 +80,10 @@ a:hover {
 }
 
 .mars-current-weather {
-  background-color: rgba(0, 0, 0, 0.75);
-  padding: 2em;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6em 2em 2em;
   max-width: 1000px;
-  margin: 4em 0 0 4em;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2em;
+  margin: 1em;
 }
 
 .date {
@@ -108,23 +100,18 @@ a:hover {
 }
 
 .temp {
-  --border: solid 0.125em var(--clr-accent-dark);
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-column: 2 / 3;
-  border-left: var(--border);
-  border-right: var(--border);
-  padding: 0 2em;
+  --border: solid .25em var(--clr-accent-dark);
+  padding: 2em 0;
 }
 
 .wind {
-  -ms-grid-column: 3;
-  -ms-grid-column-span: 1;
-  grid-column: 3 / 4;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[2];
-      grid-template-columns: repeat(2, 1fr);
+  -webkit-column-gap: 1em;
+          column-gap: 1em;
+  -ms-grid-columns: min-content 1fr;
+      grid-template-columns: -webkit-min-content 1fr;
+      grid-template-columns: min-content 1fr;
   -ms-grid-rows: min-content 1fr;
       grid-template-rows: -webkit-min-content 1fr;
       grid-template-rows: min-content 1fr;
@@ -132,8 +119,15 @@ a:hover {
       align-self: start;
 }
 
+.wind .section-title,
+.wind .reading {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+}
+
 .wind__direction {
-  --size: 6rem;
+  --size: 4rem;
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
@@ -141,14 +135,19 @@ a:hover {
   display: -ms-grid;
   display: grid;
   place-items: center;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2 / 3;
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   grid-row: 1 / span 2;
 }
 
 .wind__arrow {
-  --direction: 0deg;
-  --size: 1rem;
+  /* update Custom Props in JS
+        to update the direction */
+  --direction: 180deg;
+  --size: .75rem;
   height: calc(var(--size) * 3);
   width: var(--size);
   background: var(--clr-accent-dark);
@@ -164,12 +163,6 @@ a:hover {
   transition: transform 500ms ease, -webkit-transform 500ms ease;
 }
 
-.info {
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
-  grid-column: 1 / 3;
-}
-
 .unit {
   -ms-grid-column: 3;
   -ms-grid-column-span: 1;
@@ -179,9 +172,21 @@ a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  opacity: 0.7;
+  opacity: .7;
   -webkit-transition: opacity 275ms linear;
   transition: opacity 275ms linear;
+}
+
+@media (max-width: 900px) {
+  .unit {
+    position: absolute;
+    left: 3em;
+    top: 3em;
+  }
+}
+
+.unit:hover {
+  opacity: 1;
 }
 
 .unit label {
@@ -199,10 +204,6 @@ a:hover {
   width: 1px;
 }
 
-.unit:hover {
-  opacity: 1;
-}
-
 .unit__toggle {
   cursor: pointer;
   width: 4em;
@@ -214,7 +215,7 @@ a:hover {
 }
 
 .unit__toggle::after {
-  content: "";
+  content: '';
   display: block;
   background: var(--clr-light);
   border-radius: 50%;
@@ -224,11 +225,12 @@ a:hover {
   width: 1rem;
 }
 
-.unit :checked ~ .unit__toggle::after {
+:checked ~ .unit__toggle::after {
   margin-left: 3px;
 }
 
 .previous-weather {
+  display: none;
   background: var(--clr-light);
   color: var(--clr-dark);
   position: absolute;
@@ -240,10 +242,10 @@ a:hover {
   transition: -webkit-transform 350ms ease;
   transition: transform 350ms ease;
   transition: transform 350ms ease, -webkit-transform 350ms ease;
-  padding: 3em;
+  padding: 3rem;
 }
 
-.show-previous-weather-button {
+.show-previous-weather {
   position: absolute;
   background: var(--clr-light);
   left: 50%;
@@ -253,19 +255,19 @@ a:hover {
   text-align: center;
   font-size: var(--fs-h2);
   line-height: 1;
-  -webkit-clip-path: polygon(50% 0, 0% 100%, 100% 100%);
-          clip-path: polygon(50% 0, 0% 100%, 100% 100%);
+  -webkit-clip-path: polygon(50% 0, 0 100%, 100% 100%);
+          clip-path: polygon(50% 0, 0 100%, 100% 100%);
   cursor: pointer;
   color: var(--clr-gray);
   border: 0;
   font-family: inherit;
 }
 
-.show-previous-weather-button:hover, .show-previous-weather-button:focus {
-  color: var(--clr-accent);
+.show-previous-weather:hover, .show-previous-weather:focus {
+  color: var(--clr-dark);
 }
 
-.show-previous-weather-button span {
+.show-previous-weather span {
   display: block;
   -webkit-transform: rotate(0);
           transform: rotate(0);
@@ -297,7 +299,7 @@ a:hover {
 }
 
 .previous-day__date {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: var(--clr-gray);
 }
 
@@ -308,11 +310,11 @@ a:hover {
   background: var(--clr-dark);
   color: var(--clr-light);
   text-transform: uppercase;
-  padding: 0.3em 1em;
+  padding: .3em 1em;
   margin-top: 1em;
 }
 
-.previous-day__more-info:hover, .previous-day__more-info:focus {
+.previous-day__more-info:hover {
   background: var(--clr-gray);
 }
 
@@ -321,7 +323,7 @@ a:hover {
           transform: translateY(0);
 }
 
-.show-weather.previous-weather .show-previous-weather-button span {
+.show-weather.previous-weather .show-previous-weather span {
   display: block;
   -webkit-transform: rotate(180deg) translateY(-6px);
           transform: rotate(180deg) translateY(-6px);
@@ -395,6 +397,91 @@ a:hover {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0);
+  }
+}
+
+@media (min-width: 600px) {
+  .mars-current-weather {
+    display: -ms-grid;
+    display: grid;
+    row-gap: 2em;
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+  }
+  .date {
+    grid-column: 1 / -1;
+  }
+  .temp {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+    padding: 0;
+  }
+  .wind {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --fs-h1: 1.5rem;
+    --fs-h2: 2.25rem;
+    --fs-body: 1rem;
+    --fs-xl: 4.5rem;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .date {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+  }
+  .mars-current-weather {
+    padding: 2em;
+    margin: 4em 4em 0 4em;
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2em;
+  }
+  .temp {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+    border-left: var(--border);
+    border-right: var(--border);
+    padding: 0 2em;
+  }
+  .wind {
+    -ms-grid-column: 3;
+    -ms-grid-column-span: 1;
+    grid-column: 3 / 4;
+  }
+  .wind .section-title,
+  .wind .reading {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+  }
+  .wind__direction {
+    --size: 6rem;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    grid-row: 1 / span 2;
+  }
+  .wind__arrow {
+    --size: 1rem;
+  }
+  .info {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1 / 3;
   }
 }
 /*# sourceMappingURL=main.css.map */
