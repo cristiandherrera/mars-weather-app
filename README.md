@@ -1,4 +1,4 @@
 # mars-weather-app
 ## Insight Rover shut-down. No long recieving data.
 
-https://www.npr.org/2022/09/20/1124008585/nasas-insight-mars-lander-may-shut-down-soon-heres-what-its-achieved-so-far
+[https://www.npr.org/2022/09/20/1124008585/nasas-insight-mars-lander-may-shut-down-soon-heres-what-its-achieved-so-far](https://www.nasa.gov/press-release/nasa-retires-insight-mars-lander-mission-after-years-of-science)
